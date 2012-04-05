@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+// Source: http://stackoverflow.com/questions/5980658/how-to-sha1-hash-a-string-in-android
+
 public class SHA1Hash { 
 
 	private static String convertToHex(byte[] data) { 
