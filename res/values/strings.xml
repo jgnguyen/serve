@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, signin!</string>
+    <string name="app_name">Project2</string>
+    <string name="signIn">Sign In</string>
+    <string name="createAccount">Create a New Account</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="loginButton">Login Now</string>
+    <string name="signInName">Sign In Now</string>
+    <string name="createAccountName">Create an Account</string>
+    <string name="lastname">Last Name:</string>
+    <string name="firstname">First Name:</string>
+    <string name="uploadDoc">Upload Document</string>
+    <string name="createForm">Create Form</string>
+    <string name="attendanceCheck">Attendance Check</string>
+    <string name="startSessionButton">Start Session</string>
+    <string name="joinSessionButton">Join Session</string>
+    <string name="sessionPickerName">Sessions</string>
+    <string name="sessionNewName">Create a new Session</string>
+    <string name="sessionExistingName">Join an existing session</string>
+    <string name="emailButton">Email Now</string>
+    <string name="endSessionButton">End the session</string>
+    <string name="saveSessionButton">Save Session Info</string>
+    <string name="sessionKeyButton">Join this session</string>
+    <string name="exitSessionButton">Exit Session</string>
+    <string name="sessionResultsName">Live Results Now!</string>
+    <string name="sessionFormName">Fill in this Form, Download the File, Sign into attendence</string>
+
+</resources>

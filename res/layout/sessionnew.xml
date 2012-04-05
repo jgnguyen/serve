@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button_uploaddoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uploadDoc"
+        android:onClick="uploadDocClick" />
+
+    <Button
+        android:id="@+id/button_createform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/createForm"
+        android:onClick="createFormClick" />
+
+    <Button
+        android:id="@+id/button_attendencecheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/attendanceCheck"
+        android:onClick="attendenceCheckClick" />
+
+</LinearLayout>
