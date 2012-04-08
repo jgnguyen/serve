@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+// SHA1 Hashing
 // Source: http://stackoverflow.com/questions/5980658/how-to-sha1-hash-a-string-in-android
 
 public class serveUtilities { 
@@ -29,7 +30,7 @@ public class serveUtilities {
 		return convertToHex(sha1hash);
 	} 
 	
-	public static String getJsonFromUrl(String url) throws ClientProtocolException, IOException {
+	public static String getStringFromUrl(String url) throws ClientProtocolException, IOException {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(url);
 		HttpResponse response = client.execute(httpget);

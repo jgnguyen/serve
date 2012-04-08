@@ -33,7 +33,7 @@ public class createAccount extends Activity{
     	lastname = (EditText) findViewById(R.id.et_password);
     	
 		String url = String.format("http://www.fsurugby.org/serve/request.php?new_user=1&username=%s&password=%s&fname=&s&lname=%s", username.getText().toString(), serveUtilities.SHA1(password.getText().toString()), firstname.getText().toString(), lastname.getText().toString());
-		String result = serveUtilities.getJsonFromUrl(url);
+		String result = serveUtilities.getStringFromUrl(url);
 		
 		if (result.equals("good")) {
 	    	// issue intent to the session picker.

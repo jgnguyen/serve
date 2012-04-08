@@ -33,7 +33,7 @@ public class signIn extends Activity{
 		String password = et_password.getText().toString();
 		String url = String.format("http://www.fsurugby.org/serve/request.php?login=1&username=%s&password=%s", username, serveUtilities.SHA1(password));
 		
-		JSONArray json = new JSONArray(serveUtilities.getJsonFromUrl(url));
+		JSONArray json = new JSONArray(serveUtilities.getStringFromUrl(url));
 		String id = "";
 		if (json.length() == 1)
 			id = json.getJSONObject(0).getString("id");
