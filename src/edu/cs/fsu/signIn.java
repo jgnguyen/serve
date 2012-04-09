@@ -6,16 +6,17 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class signIn extends Activity{
+public class signIn extends Activity {
 
 	EditText username;
 	EditText password;
@@ -35,12 +36,24 @@ public class signIn extends Activity{
 		
 		JSONArray json = new JSONArray(serveUtilities.getStringFromUrl(url));
 		String id = "";
+		String fname = "";
+		String lname = "";
+		
 		if (json.length() == 1)
 			id = json.getJSONObject(0).getString("id");
+			fname = json.getJSONObject(0).getString("fname");
+			lname = json.getJSONObject(0).getString("lname");
 		
 		if (id.isEmpty()) {
 			Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
 		} else {
+			final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+			final SharedPreferences.Editor editor = app_preferences.edit();
+			
+			editor.putString("fname", fname);
+			editor.putString("lname", lname);
+			editor.commit();
+			
 			Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
 			startActivity(i);
 		}

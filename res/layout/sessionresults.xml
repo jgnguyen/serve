@@ -24,11 +24,13 @@
         android:layout_height="wrap_content"
         android:text="or have submitted the survey"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
      <ListView
         android:id="@+id/sessionResultsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
+
 
     <Button
         android:id="@+id/button_endsession"
