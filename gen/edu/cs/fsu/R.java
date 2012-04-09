@@ -28,7 +28,7 @@ public final class R {
         public static final int button_startsession=0x7f05001a;
         public static final int button_uploaddoc=0x7f050017;
         public static final int editText_sessionID=0x7f050016;
-        public static final int editText_sessionName=0x7f050013;
+        public static final int editText_sessionName=0x7f050014;
         public static final int et_firstname=0x7f050007;
         public static final int et_lastname=0x7f050009;
         public static final int et_password=0x7f050005;
@@ -41,7 +41,7 @@ public final class R {
         public static final int textView2=0x7f050010;
         public static final int textView3=0x7f050011;
         public static final int textView_sessionID=0x7f050015;
-        public static final int textView_sessionName=0x7f050014;
+        public static final int textView_sessionName=0x7f050013;
         public static final int tv_firstname=0x7f050006;
         public static final int tv_lastname=0x7f050008;
         public static final int tv_password=0x7f050004;
