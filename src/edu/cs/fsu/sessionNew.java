@@ -40,7 +40,7 @@ public class sessionNew extends Activity {
 	public void attendenceCheckClick(View v)
 	{
 
-		String fname, lname, sessName, sID;	
+		String fname, lname, sessionName, sessionID;	
 		final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		EditText editText_sessionName, editText_sessionID;
@@ -50,10 +50,10 @@ public class sessionNew extends Activity {
 
 		fname = app_preferences.getString("fname", "");
 		lname = app_preferences.getString("lname", "");
-		sessName = editText_sessionName.getText().toString();
-		sID = editText_sessionID.getText().toString();
+		sessionName = editText_sessionName.getText().toString();
+		sessionID = editText_sessionID.getText().toString();
 
-		String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sID, sessName, fname, lname);
+		String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sessionID, sessionName, fname, lname);
 		String result = "";
 		try {
 			result = serveUtilities.getStringFromUrl(url);
@@ -69,8 +69,9 @@ public class sessionNew extends Activity {
 			Log.e("StartingSession","Failed to create session");
 		} else {
 			Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
-			//add information to the intent
-			startActivity(i);
+	    	i.putExtra("sessionID", sessionID);
+	    	i.putExtra("sessionName", sessionName);
+	    	startActivity(i);
 		}
 	}
 }

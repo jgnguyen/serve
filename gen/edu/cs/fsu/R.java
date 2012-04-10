@@ -20,11 +20,11 @@ public final class R {
         public static final int button1=0x7f060010;
         public static final int button_createAccount=0x7f06000a;
         public static final int button_createaccount=0x7f060008;
-        public static final int button_emailsession=0x7f06001e;
-        public static final int button_endsession=0x7f06001c;
+        public static final int button_emailsession=0x7f060021;
+        public static final int button_endsession=0x7f06001f;
         public static final int button_joinsession=0x7f060019;
         public static final int button_logout=0x7f06001a;
-        public static final int button_savesession=0x7f06001d;
+        public static final int button_savesession=0x7f060020;
         public static final int button_sessionkeysubmit=0x7f06000c;
         public static final int button_signIn=0x7f060009;
         public static final int button_startsession=0x7f060018;
@@ -36,7 +36,7 @@ public final class R {
         public static final int et_sessionkey=0x7f06000b;
         public static final int et_username=0x7f060001;
         public static final int linearLayout1=0x7f060015;
-        public static final int sessionResultsListView=0x7f06001b;
+        public static final int sessionResultsListView=0x7f06001e;
         public static final int spinner_type=0x7f060016;
         public static final int submitButton=0x7f060017;
         public static final int textView1=0x7f06000d;
@@ -47,6 +47,9 @@ public final class R {
         public static final int tv_firstname=0x7f060004;
         public static final int tv_lastname=0x7f060006;
         public static final int tv_password=0x7f060002;
+        public static final int tv_results_sessionID=0x7f06001c;
+        public static final int tv_results_sessionName=0x7f06001b;
+        public static final int tv_results_sessionType=0x7f06001d;
         public static final int tv_username=0x7f060000;
     }
     public static final class layout {
