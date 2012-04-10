@@ -7,3 +7,5 @@
 #known bugs
 - cannot create a sessionName with a space in it
 
+# end session
+Clear database of session info

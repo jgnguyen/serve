@@ -31,26 +31,30 @@ public class sessionExisting extends Activity{
 
 		sessionID = et_sessionkey.getText().toString();
 
-		String url = String.format("http://www.fsurugby.org/serve/request.php?add_attendee=1&sessionID=%s&fname=%s&lname=%s", sessionID, fname, lname);
-		String result = "";
-		try {
-			result = serveUtilities.getStringFromUrl(url);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if (sessionID.isEmpty()) {
+			Toast.makeText(this, "Enter a sessionID", Toast.LENGTH_SHORT).show();
+		} else {
+			String url = String.format("http://www.fsurugby.org/serve/request.php?add_attendee=1&sessionID=%s&fname=%s&lname=%s", sessionID, fname, lname);
+			String result = "";
+			try {
+				result = serveUtilities.getStringFromUrl(url);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		if (!result.equals("good")) {
-			Log.e("JoiningSession","Failed to join session");
-		}
-		else {
-			Toast.makeText(getApplicationContext(), "You have successfully joined session "+sessionID, Toast.LENGTH_SHORT);
-			
-			Intent i = new Intent(this,edu.cs.fsu.sessionForm.class);
-			startActivity(i);
+			if (!result.equals("good")) {
+				Toast.makeText(this, "Could not join session", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				Toast.makeText(this, "You have successfully joined session "+sessionID, Toast.LENGTH_SHORT).show();
+
+				Intent i = new Intent(this,edu.cs.fsu.sessionForm.class);
+				startActivity(i);
+			} 
 		}
 	}
 }

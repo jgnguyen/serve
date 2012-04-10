@@ -14,20 +14,21 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class sessionNew extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sessionnew);
-		
+
 		Spinner s = (Spinner) findViewById(R.id.spinner_type);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.sessionTypes, android.R.layout.simple_spinner_dropdown_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
 	}
-	
+
 	public void submit(View v)
 	{
 		Spinner s = (Spinner) findViewById(R.id.spinner_type);
@@ -53,25 +54,31 @@ public class sessionNew extends Activity {
 		sessionName = editText_sessionName.getText().toString();
 		sessionID = editText_sessionID.getText().toString();
 
-		String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sessionID, sessionName, fname, lname);
-		String result = "";
-		try {
-			result = serveUtilities.getStringFromUrl(url);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (!result.equals("good")) {
-			Log.e("StartingSession","Failed to create session");
+		if (sessionName.isEmpty() || sessionID.isEmpty()) {
+			Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
 		} else {
-			Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
-	    	i.putExtra("sessionID", sessionID);
-	    	i.putExtra("sessionName", sessionName);
-	    	startActivity(i);
+			String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sessionID, sessionName, fname, lname);
+			String result = "";
+			try {
+				result = serveUtilities.getStringFromUrl(url);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (!result.equals("good")) {
+				Toast.makeText(this, "SessionID already taken. Cannot create session", Toast.LENGTH_SHORT).show();
+				Log.e("StartingSession","Failed to create session");
+			} else {
+				Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
+				i.putExtra("sessionID", sessionID);
+				i.putExtra("sessionName", sessionName);
+				i.putExtra("sessionType", "attendance");
+				startActivity(i);
+			}
 		}
 	}
 }

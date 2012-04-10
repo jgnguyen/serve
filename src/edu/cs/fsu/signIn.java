@@ -29,33 +29,37 @@ public class signIn extends Activity {
 		EditText et_password = (EditText) findViewById(R.id.et_password);
 		String username = et_username.getText().toString();
 		String password = et_password.getText().toString();
-		String url = String.format("http://www.fsurugby.org/serve/request.php?login=1&username=%s&password=%s", username, serveUtilities.SHA1(password));
-
-		JSONArray json = new JSONArray(serveUtilities.getStringFromUrl(url));
-		String id = "";
-		String fname = "";
-		String lname = "";
-
-		if (!json.isNull(0) && json.length() == 1) {
-			id = json.getJSONObject(0).getString("id");
-			fname = json.getJSONObject(0).getString("fname");
-			lname = json.getJSONObject(0).getString("lname");
-
-			if (id.isEmpty()) {
-				Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
-			} else {
-				final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
-				final SharedPreferences.Editor editor = app_preferences.edit();
-
-				editor.putString("fname", fname);
-				editor.putString("lname", lname);
-				editor.commit();
-
-				Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
-				startActivity(i);
-			}
+		if (username.isEmpty() || password.isEmpty()) {
+			Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
+			String url = String.format("http://www.fsurugby.org/serve/request.php?login=1&username=%s&password=%s", username, serveUtilities.SHA1(password));
+
+			JSONArray json = new JSONArray(serveUtilities.getStringFromUrl(url));
+			String id = "";
+			String fname = "";
+			String lname = "";
+
+			if (!json.isNull(0) && json.length() == 1) {
+				id = json.getJSONObject(0).getString("id");
+				fname = json.getJSONObject(0).getString("fname");
+				lname = json.getJSONObject(0).getString("lname");
+
+				if (id.isEmpty()) {
+					Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
+				} else {
+					final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+					final SharedPreferences.Editor editor = app_preferences.edit();
+
+					editor.putString("fname", fname);
+					editor.putString("lname", lname);
+					editor.commit();
+
+					Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
+					startActivity(i);
+				}
+			} else {
+				Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 }
