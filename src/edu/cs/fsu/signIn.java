@@ -33,29 +33,32 @@ public class signIn extends Activity {
 		String username = et_username.getText().toString();
 		String password = et_password.getText().toString();
 		String url = String.format("http://www.fsurugby.org/serve/request.php?login=1&username=%s&password=%s", username, serveUtilities.SHA1(password));
-		
+
 		JSONArray json = new JSONArray(serveUtilities.getStringFromUrl(url));
 		String id = "";
 		String fname = "";
 		String lname = "";
-		
-		if (json.length() == 1)
+
+		if (!json.isNull(0) && json.length() == 1) {
 			id = json.getJSONObject(0).getString("id");
 			fname = json.getJSONObject(0).getString("fname");
 			lname = json.getJSONObject(0).getString("lname");
-		
-		if (id.isEmpty()) {
-			Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
+
+			if (id.isEmpty()) {
+				Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
+			} else {
+				final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+				final SharedPreferences.Editor editor = app_preferences.edit();
+
+				editor.putString("fname", fname);
+				editor.putString("lname", lname);
+				editor.commit();
+
+				Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
+				startActivity(i);
+			}
 		} else {
-			final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
-			final SharedPreferences.Editor editor = app_preferences.edit();
-			
-			editor.putString("fname", fname);
-			editor.putString("lname", lname);
-			editor.commit();
-			
-			Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
-			startActivity(i);
+			Toast.makeText(this, "Incorrect Login", Toast.LENGTH_LONG).show();
 		}
 	}
 }

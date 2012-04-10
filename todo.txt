@@ -1,0 +1,7 @@
+#session id
+- sessions should always keep attendees in list
+- Users::session_id maybe is useless then
+- need to make sure to not add redundancy to attendees
+
+#known bugs
+- cannot create a sessionName with a space in it

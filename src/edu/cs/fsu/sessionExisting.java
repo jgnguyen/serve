@@ -49,7 +49,7 @@ public class sessionExisting extends Activity{
 		else {
 			Toast.makeText(getApplicationContext(), "You have successfully joined session "+sessionID, Toast.LENGTH_SHORT);
 			
-			Intent i = new Intent(this,edu.cs.fsu.sessionForm.class);
+			Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
 			startActivity(i);
 		}
 	}
