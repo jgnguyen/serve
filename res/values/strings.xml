@@ -17,6 +17,7 @@
     <string name="attendanceCheck">Attendance Check</string>
     <string name="startSessionButton">Start Session</string>
     <string name="joinSessionButton">Join Session</string>
+    <string name="logoutButton">Logout</string>
     <string name="sessionPickerName">Sessions</string>
     <string name="sessionNewName">Create a new Session</string>
     <string name="sessionExistingName">Join an existing session</string>
@@ -30,4 +31,10 @@
     <string name="sessionIDRequest">Session ID: </string>
     <string name="sessionNameRequest">Session Name: </string>
 
+    <string-array name="sessionTypes">
+        <item>Attendance</item>
+        <item>Survey</item>
+        <item>Survey (Anonymous)</item>
+    </string-array>
+    
 </resources>

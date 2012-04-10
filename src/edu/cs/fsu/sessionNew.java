@@ -11,27 +11,30 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class sessionNew extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sessionnew);
+		
+		Spinner s = (Spinner) findViewById(R.id.spinner_type);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.sessionTypes, android.R.layout.simple_spinner_dropdown_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		s.setAdapter(adapter);
 	}
-
-	public void uploadDocClick(View v)
+	
+	public void submit(View v)
 	{
-		Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
-		//add information to the intent
-		startActivity(i);
-	}
-
-	public void createFormClick(View v)
-	{
-		Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
-		//add information to the intent
-		startActivity(i);
+		Spinner s = (Spinner) findViewById(R.id.spinner_type);
+		String selected = s.getSelectedItem().toString();
+		if (selected.equals("Attendance")) {
+			attendenceCheckClick(v);
+		}
 	}
 
 	public void attendenceCheckClick(View v)

@@ -32,12 +32,16 @@ public class createAccount extends Activity{
     	firstname = (EditText) findViewById(R.id.et_firstname);
     	lastname = (EditText) findViewById(R.id.et_lastname);
     	
-		String url = String.format("http://www.fsurugby.org/serve/request.php?new_user=1&username=%s&password=%s&fname=%s&lname=%s", username.getText().toString(), serveUtilities.SHA1(password.getText().toString()), firstname.getText().toString(), lastname.getText().toString());
+		String url = String.format("http://www.fsurugby.org/serve/request.php?new_user=1&username=%s&password=%s&fname=%s&lname=%s",
+				username.getText().toString(),
+				serveUtilities.SHA1(password.getText().toString()),
+				firstname.getText().toString(),
+				lastname.getText().toString());
 		String result = serveUtilities.getStringFromUrl(url);
 		
 		if (result.equals("good")) {
 	    	// issue intent to the session picker.
-	    	Intent i = new Intent(this,edu.cs.fsu.main.class);
+	    	Intent i = new Intent(this,edu.cs.fsu.signIn.class);
 	    	startActivity(i);
 		} else {
 			Toast.makeText(this, "Could not create account", Toast.LENGTH_LONG).show();

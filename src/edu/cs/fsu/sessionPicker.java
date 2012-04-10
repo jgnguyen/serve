@@ -28,4 +28,9 @@ public class sessionPicker extends Activity {
     
     }
      
+    public void logout(View v)
+    {
+    	Intent i = new Intent(this, edu.cs.fsu.main.class);
+    	startActivity(i);
+    }
 }

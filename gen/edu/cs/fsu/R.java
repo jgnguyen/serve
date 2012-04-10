@@ -8,56 +8,56 @@
 package edu.cs.fsu;
 
 public final class R {
+    public static final class array {
+        public static final int sessionTypes=0x7f050000;
+    }
     public static final class attr {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int button1=0x7f050012;
-        public static final int button_attendencecheck=0x7f050019;
-        public static final int button_createAccount=0x7f05000c;
-        public static final int button_createaccount=0x7f05000a;
-        public static final int button_createform=0x7f050018;
-        public static final int button_emailsession=0x7f05001f;
-        public static final int button_endsession=0x7f05001d;
-        public static final int button_joinsession=0x7f05001b;
-        public static final int button_savesession=0x7f05001e;
-        public static final int button_sessionkeysubmit=0x7f05000e;
-        public static final int button_signIn=0x7f05000b;
-        public static final int button_startsession=0x7f05001a;
-        public static final int button_uploaddoc=0x7f050017;
-        public static final int editText_sessionID=0x7f050016;
-        public static final int editText_sessionName=0x7f050014;
-        public static final int et_firstname=0x7f050007;
-        public static final int et_lastname=0x7f050009;
-        public static final int et_password=0x7f050005;
-        public static final int et_sessionkey=0x7f05000d;
-        public static final int et_username=0x7f050003;
-        public static final int layout_root=0x7f050000;
-        public static final int sessionResultsListView=0x7f05001c;
-        public static final int text=0x7f050001;
-        public static final int textView1=0x7f05000f;
-        public static final int textView2=0x7f050010;
-        public static final int textView3=0x7f050011;
-        public static final int textView_sessionID=0x7f050015;
-        public static final int textView_sessionName=0x7f050013;
-        public static final int tv_firstname=0x7f050006;
-        public static final int tv_lastname=0x7f050008;
-        public static final int tv_password=0x7f050004;
-        public static final int tv_username=0x7f050002;
+        public static final int button1=0x7f060010;
+        public static final int button_createAccount=0x7f06000a;
+        public static final int button_createaccount=0x7f060008;
+        public static final int button_emailsession=0x7f06001e;
+        public static final int button_endsession=0x7f06001c;
+        public static final int button_joinsession=0x7f060019;
+        public static final int button_logout=0x7f06001a;
+        public static final int button_savesession=0x7f06001d;
+        public static final int button_sessionkeysubmit=0x7f06000c;
+        public static final int button_signIn=0x7f060009;
+        public static final int button_startsession=0x7f060018;
+        public static final int editText_sessionID=0x7f060014;
+        public static final int editText_sessionName=0x7f060012;
+        public static final int et_firstname=0x7f060005;
+        public static final int et_lastname=0x7f060007;
+        public static final int et_password=0x7f060003;
+        public static final int et_sessionkey=0x7f06000b;
+        public static final int et_username=0x7f060001;
+        public static final int linearLayout1=0x7f060015;
+        public static final int sessionResultsListView=0x7f06001b;
+        public static final int spinner_type=0x7f060016;
+        public static final int submitButton=0x7f060017;
+        public static final int textView1=0x7f06000d;
+        public static final int textView2=0x7f06000e;
+        public static final int textView3=0x7f06000f;
+        public static final int textView_sessionID=0x7f060013;
+        public static final int textView_sessionName=0x7f060011;
+        public static final int tv_firstname=0x7f060004;
+        public static final int tv_lastname=0x7f060006;
+        public static final int tv_password=0x7f060002;
+        public static final int tv_username=0x7f060000;
     }
     public static final class layout {
-        public static final int create_session_dialog=0x7f030000;
-        public static final int createaccount=0x7f030001;
-        public static final int joinsession=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int sessionexisting=0x7f030004;
-        public static final int sessionform=0x7f030005;
-        public static final int sessionnew=0x7f030006;
-        public static final int sessionpicker=0x7f030007;
-        public static final int sessionresults=0x7f030008;
-        public static final int signin=0x7f030009;
+        public static final int createaccount=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int sessionexisting=0x7f030002;
+        public static final int sessionform=0x7f030003;
+        public static final int sessionnew=0x7f030004;
+        public static final int sessionpicker=0x7f030005;
+        public static final int sessionresults=0x7f030006;
+        public static final int signin=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
@@ -65,24 +65,25 @@ public final class R {
         public static final int createAccount=0x7f040003;
         public static final int createAccountName=0x7f040008;
         public static final int createForm=0x7f04000c;
-        public static final int emailButton=0x7f040013;
-        public static final int endSessionButton=0x7f040014;
-        public static final int exitSessionButton=0x7f040017;
+        public static final int emailButton=0x7f040014;
+        public static final int endSessionButton=0x7f040015;
+        public static final int exitSessionButton=0x7f040018;
         public static final int firstname=0x7f04000a;
         public static final int hello=0x7f040000;
         public static final int joinSessionButton=0x7f04000f;
         public static final int lastname=0x7f040009;
         public static final int loginButton=0x7f040006;
+        public static final int logoutButton=0x7f040010;
         public static final int password=0x7f040005;
-        public static final int saveSessionButton=0x7f040015;
-        public static final int sessionExistingName=0x7f040012;
-        public static final int sessionFormName=0x7f040019;
-        public static final int sessionIDRequest=0x7f04001a;
-        public static final int sessionKeyButton=0x7f040016;
-        public static final int sessionNameRequest=0x7f04001b;
-        public static final int sessionNewName=0x7f040011;
-        public static final int sessionPickerName=0x7f040010;
-        public static final int sessionResultsName=0x7f040018;
+        public static final int saveSessionButton=0x7f040016;
+        public static final int sessionExistingName=0x7f040013;
+        public static final int sessionFormName=0x7f04001a;
+        public static final int sessionIDRequest=0x7f04001b;
+        public static final int sessionKeyButton=0x7f040017;
+        public static final int sessionNameRequest=0x7f04001c;
+        public static final int sessionNewName=0x7f040012;
+        public static final int sessionPickerName=0x7f040011;
+        public static final int sessionResultsName=0x7f040019;
         public static final int signIn=0x7f040002;
         public static final int signInName=0x7f040007;
         public static final int startSessionButton=0x7f04000e;

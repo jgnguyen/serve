@@ -39,25 +39,30 @@
             android:inputType="number" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_uploaddoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="uploadDocClick"
-        android:text="@string/uploadDoc" />
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type" />
+
+        <Spinner
+            android:id="@+id/spinner_type"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button_createform"
+        android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="createFormClick"
-        android:text="@string/createForm" />
-
-    <Button
-        android:id="@+id/button_attendencecheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="attendenceCheckClick"
-        android:text="@string/attendanceCheck" />
+        android:text="Create Session"
+        android:onClick="submit" />
 
 </LinearLayout>

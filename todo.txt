@@ -5,3 +5,4 @@
 
 #known bugs
 - cannot create a sessionName with a space in it
+

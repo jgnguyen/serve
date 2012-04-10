@@ -17,9 +17,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class signIn extends Activity {
-
-	EditText username;
-	EditText password;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
