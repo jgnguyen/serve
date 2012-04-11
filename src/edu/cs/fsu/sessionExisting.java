@@ -20,9 +20,10 @@ public class sessionExisting extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sessionexisting);
 	}
-	public void submitCodeClick(View v)
+	public void submitCodeClick(View v) throws ClientProtocolException, IOException
 	{
 		final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		final SharedPreferences.Editor editor = app_preferences.edit();
 
 		String sessionID;
 		String fname = app_preferences.getString("fname", "");
@@ -34,27 +35,23 @@ public class sessionExisting extends Activity{
 		if (sessionID.isEmpty()) {
 			Toast.makeText(this, "Enter a sessionID", Toast.LENGTH_SHORT).show();
 		} else {
+			editor.putString("sessionID", sessionID);
+			editor.commit();
+			
 			String url = String.format("http://www.fsurugby.org/serve/request.php?add_attendee=1&sessionID=%s&fname=%s&lname=%s", sessionID, fname, lname);
 			String result = "";
-			try {
-				result = serveUtilities.getStringFromUrl(url);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			result = serveUtilities.getStringFromUrl(url);
 
 			if (!result.equals("good")) {
-				Toast.makeText(this, "Could not join session", Toast.LENGTH_SHORT).show();
+				Log.e("JoiningSession","Failed to join session");
 			}
 			else {
-				Toast.makeText(this, "You have successfully joined session "+sessionID, Toast.LENGTH_SHORT).show();
-
+				Toast.makeText(getApplicationContext(), "You have successfully joined session "+sessionID, Toast.LENGTH_SHORT).show();
+				
 				Intent i = new Intent(this,edu.cs.fsu.sessionForm.class);
 				startActivity(i);
-			} 
+			}
 		}
 	}
+
 }

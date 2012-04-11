@@ -1,176 +1,242 @@
 package edu.cs.fsu;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class sessionResults extends Activity {
-	
-	
 	ListView results;
 	String nameList;
 	String[] values;
 	String url;
-	
-	String sessionID;
-	String sessionName;
-	String sessionType;
-	
-	
 	String jsonresults;
-	
-	TextView id;
-	TextView name;
-	TextView type;
-	
+	EditText sessionIDet;
 	private JSONArray jObject;
-	
-	
-	Thread updateData;
-	Handler mHandler;
-	boolean updateDataThreadBool;
+	public String sessionID;
+	public String type;
+	String sendResult;
+	EditText et_question1, et_question2, et_question3, et_question4, et_question5, et_question6, et_question7, et_question8, et_question9, et_question10;
 
-	
 	protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e("tagger","OnCreate");
-        //  set content view
-        setContentView(R.layout.sessionresults);
-        
-        // set up Handler for automatic data refreshes
-        mHandler = new Handler();
-        updateDataThreadBool = true;
-       
-        // get handles
-        results = (ListView) findViewById(R.id.sessionResultsListView); 
-        name = (TextView) findViewById(R.id.tv_results_sessionName);
-        id = (TextView) findViewById(R.id.tv_results_sessionID);
-        type = (TextView) findViewById(R.id.tv_results_sessionType);
-        
-        Log.e("tagger","Got Handles");
-       
-        // get extras from intent
-        sessionID = getIntent().getStringExtra("sessionID");
-        sessionName = getIntent().getStringExtra("sessionName");
-        sessionType = getIntent().getStringExtra("sessionType");
-        
-        Log.e("tagger","Got Intent Extras");
-        
-        name.setText(sessionName);
-        id.setText(sessionID);
-        type.setText(sessionType);
-        
-        Log.e("tagger","set Text");
-        // Get Data via json
-        // update values array
-        // set array adapter
-        
-        Log.e("tagger","get first session results");
-        getSessionResults();
-        Log.e("tagger","going into updatedatathread");
-        //updateDataThread();
-        Log.e("tagger","leaving updatedatathread");
+		super.onCreate(savedInstanceState);
 
-        
+		final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		sessionID = app_preferences.getString("sessionID", "");
+		type = app_preferences.getString("type", "");
+		
+		updateResults();
 	}
-	public void endSessionClick(View v)
-	{
-		updateDataThreadBool = false;
-		Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
-		startActivity(i);
+
+	public void updateResults() {
+		if (type.equals("attendance")) {
+			setContentView(R.layout.sessionresults);
+			url = String.format("http://www.fsurugby.org/serve/request.php?attendees=1&sessionID=%s", sessionID);
+			getSessionResults();
+		}
+		else if (type.equals("submitSurvey")) {
+			setContentView(R.layout.sessionresults);
+			
+//			url = String.format("http://www.fsurugby.org/serve/request.php?get_answers=1&sessionID=%s&fname=%s&lname=%s", sessionID, fname, lname);
+			
+		}
+		else {
+			setContentView(R.layout.sessionresultsurvey);
+
+			final Button createSurvey = (Button) findViewById(R.id.createSurveyButton);
+
+			et_question1 = (EditText) findViewById(R.id.editText_question1);
+			et_question2 = (EditText) findViewById(R.id.editText_question2);
+			et_question3 = (EditText) findViewById(R.id.editText_question3);
+			et_question4 = (EditText) findViewById(R.id.editText_question4);
+			et_question5 = (EditText) findViewById(R.id.editText_question5);
+			et_question6 = (EditText) findViewById(R.id.editText_question6);
+			et_question7 = (EditText) findViewById(R.id.editText_question7);
+			et_question8 = (EditText) findViewById(R.id.editText_question8);
+			et_question9 = (EditText) findViewById(R.id.editText_question9);
+			et_question10 = (EditText) findViewById(R.id.editText_question10);
+			
+			final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+			final SharedPreferences.Editor editor = app_preferences.edit();
+
+			createSurvey.setOnClickListener(new View.OnClickListener() {
+
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+					String question1 = et_question1.getText().toString();
+					String question2 = et_question2.getText().toString();
+					String question3 = et_question3.getText().toString();
+					String question4 = et_question4.getText().toString();
+					String question5 = et_question5.getText().toString();
+					String question6 = et_question6.getText().toString();
+					String question7 = et_question7.getText().toString();
+					String question8 = et_question8.getText().toString();
+					String question9 = et_question9.getText().toString();
+					String question10 = et_question10.getText().toString();
+
+					sendResult = "";
+
+					if (!question1.equals(""))
+						sendResult += question1;
+					if (!question2.equals("")) {
+						sendResult += ",";
+						sendResult += question2;
+					}
+					if (!question3.equals("")) {
+						sendResult += ",";
+						sendResult += question3;
+					}
+					if (!question4.equals("")) {
+						sendResult += ",";
+						sendResult += question4;
+					}
+					if (!question5.equals("")) {
+						sendResult += ",";
+						sendResult += question5;
+					}
+					if (!question6.equals("")) {
+						sendResult += ",";
+						sendResult += question6;
+					}
+					if (!question7.equals("")) {
+						sendResult += ",";
+						sendResult += question7;
+					}
+					if (!question8.equals("")) {
+						sendResult += ",";
+						sendResult += question8;
+					}
+					if (!question9.equals("")) {
+						sendResult += ",";
+						sendResult += question9;
+					}
+					if (!question10.equals("")){ 
+						sendResult += ",";
+						sendResult += question10;
+					}
+
+
+					Log.d("SessionResult", sendResult);
+
+					url = String.format("http://www.fsurugby.org/serve/request.php?new_survey=1&sessionID=%s&questions=%s", sessionID, sendResult);
+
+					String result = "";
+					try {
+						result = serveUtilities.getStringFromUrl(url);
+					} catch (ClientProtocolException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					if (!result.equals("good")) {
+						Log.e("JoiningSession","Failed to join session");
+					}
+					else {
+						Log.d("CreatedSurvey", "Created it correctly!");
+						editor.putString("type", "submitSurvey");
+						editor.commit();
+						updateResults();
+					}  
+				}
+			});
+		}
 	}
-	public void emailSessionClick(View v)
-	{
-		updateDataThreadBool = false;
+/*
+	public void getSurveryResults() {
 		
 	}
-	public void saveSessionClick(View v)
-	{
-		updateDataThreadBool = false;
-		
-	}
+	*/
+	
 	public void getSessionResults()
 	{
+		try{
+			Log.d("url: ", url);
+			jsonresults = serveUtilities.getStringFromUrl(url);
+		}
+		catch(Exception e)
+		{
+			Log.e("tagger","fauked ti getstrubfrom url");
 
-		url = String.format("http://www.fsurugby.org/serve/request.php?attendees=1&sessionID=%s", sessionID);
-		
-        try{
-        	jsonresults = serveUtilities.getStringFromUrl(url);
-        }
-        catch(Exception e)
-        {
-        	Log.e("tagger","fauked ti getstrubfrom url");
-        	
-        }
-        try {
+		}
+		try {
 			jObject = new JSONArray(jsonresults);
-			
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-        nameList = "Waiting for results... (empty)";
-        try {
-        	nameList = jObject.getJSONObject(0).getString("attendees");
-	       // String fnameId = menuObject.getString("fname");
-	       // String lnameId = menuObject.getString("lname");
-	        Log.e("tagger", nameList);
-	
+
+		try {
+			nameList = jObject.getJSONObject(0).getString("attendees");
+			Log.d("nameList: ", nameList);
+			Log.e("tagger", nameList);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Log.e("tagger",nameList.toString());
-		if(! nameList.isEmpty() )
-		{
-			Log.e("tagger","in if");
-			values = nameList.split(",");
-		}      
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-    			android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        
-        results.setAdapter(adapter);
+		values = nameList.split(",");
+		results = (ListView) findViewById(R.id.sessionResultsListView); 
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+		results.setAdapter(adapter);
 	}
-	public void updateDataThread()
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		
-		Log.e("tagger","Thread Started");
-		 new Thread(new Runnable() {
-		        public void run() {
-		            // TODO Auto-generated method stub
-		            while (updateDataThreadBool) {
-		                try {
-		                    Thread.sleep(10000);
-		                    mHandler.post(new Runnable() {
-
-		                        public void run() {
-		                        	
-		                        	
-		                        		getSessionResults();
-		                        	}
-		                        
-		                    });
-		                } catch (Exception e) {
-		                    // TODO: handle exception
-		                }
-		                
-		            }
-		            
-		        }
-		                
-		    }).start();
-		 Log.e("tagger","Thread Finished");
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.sessionresultsmenu, menu);
+		return true;
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		Log.e("sessionResult","in option bool");
+		switch (item.getItemId()) {
+		case R.id.menu_item_endsession:    		
+			final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+			final SharedPreferences.Editor editor = app_preferences.edit();
+
+			editor.putString("type", "");
+			editor.putString("sessionID", "");
+			editor.commit();
+
+			Intent i = new Intent(this,edu.cs.fsu.sessionPicker.class);
+			startActivity(i);
+		break;
+		case R.id.menu_item_email:     
+			break;  
+		case R.id.menu_item_save: 
+			break;
+		case R.id.menu_item_refresh: 
+			updateResults();	
+			Log.e("sessionResult","refresh");
+			break;
+		}
+		Log.e("sessionResult","out option bool");
+		return true;
+	}
+
+
 }
-
-

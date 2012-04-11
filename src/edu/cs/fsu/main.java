@@ -2,8 +2,10 @@ package edu.cs.fsu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class main extends Activity {
 	/** Called when the activity is first created. */
@@ -11,6 +13,9 @@ public class main extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		TextView txt = (TextView) findViewById(R.id.app_name);  
+		Typeface font = Typeface.createFromAsset(getAssets(), "Amorino_beta.ttf");  
+		txt.setTypeface(font); 
 	}
 	
 	public void createNewAccountClick(View target)

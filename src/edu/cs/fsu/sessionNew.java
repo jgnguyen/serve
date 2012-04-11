@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class sessionNew extends Activity {
+	String fname, lname, sessName, sID;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,18 +32,23 @@ public class sessionNew extends Activity {
 
 	public void submit(View v)
 	{
+		final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		final SharedPreferences.Editor editor = app_preferences.edit();
+
 		Spinner s = (Spinner) findViewById(R.id.spinner_type);
 		String selected = s.getSelectedItem().toString();
 		if (selected.equals("Attendance")) {
-			attendenceCheckClick(v);
+			editor.putString("type", "attendance");
+			editor.commit();	
 		}
-	}
-
-	public void attendenceCheckClick(View v)
-	{
-
-		String fname, lname, sessionName, sessionID;	
-		final SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		else if (selected.equals("Survey")) {
+			editor.putString("type", "survey");
+			editor.commit();
+		}
+		else {
+			editor.putString("type", "surveyannony");
+			editor.commit();
+		}
 
 		EditText editText_sessionName, editText_sessionID;
 
@@ -51,34 +57,31 @@ public class sessionNew extends Activity {
 
 		fname = app_preferences.getString("fname", "");
 		lname = app_preferences.getString("lname", "");
-		sessionName = editText_sessionName.getText().toString();
-		sessionID = editText_sessionID.getText().toString();
+		sessName = editText_sessionName.getText().toString();
+		sID = editText_sessionID.getText().toString();
+		
+		editor.putString("sessionID", sID);
+		editor.commit();
 
-		if (sessionName.isEmpty() || sessionID.isEmpty()) {
-			Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+		String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sID, sessName, fname, lname);
+		String result = "";
+		try {
+			result = serveUtilities.getStringFromUrl(url);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (!result.equals("good")) {
+			Log.e("StartingSession","Failed to create session");
+			Toast.makeText(this, "Cannot create session", Toast.LENGTH_SHORT).show();
 		} else {
-			String url = String.format("http://www.fsurugby.org/serve/request.php?new_session=1&sessionID=%s&sessionName=%s&fname=%s&lname=%s", sessionID, sessionName, fname, lname);
-			String result = "";
-			try {
-				result = serveUtilities.getStringFromUrl(url);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (!result.equals("good")) {
-				Toast.makeText(this, "SessionID already taken. Cannot create session", Toast.LENGTH_SHORT).show();
-				Log.e("StartingSession","Failed to create session");
-			} else {
-				Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
-				i.putExtra("sessionID", sessionID);
-				i.putExtra("sessionName", sessionName);
-				i.putExtra("sessionType", "attendance");
-				startActivity(i);
-			}
+			Intent i = new Intent(this,edu.cs.fsu.sessionResults.class);
+			//add information to the intent
+			startActivity(i);
 		}
 	}
 }
