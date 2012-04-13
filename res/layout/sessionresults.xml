@@ -2,33 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/bg" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_results_sessionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List of People that have submitted attendece"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_results_sessionID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="or have downloaded the file"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_results_sessionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="or have submitted the survey"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
      <ListView
         android:id="@+id/sessionResultsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
+
 
 </LinearLayout>

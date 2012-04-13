@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+//import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +53,7 @@ public class sessionForm extends Activity{
 			
 			setContentView(R.layout.sessionformview);
 			
-			ScrollView scroll = (ScrollView) findViewById(R.id.scrollView1);
+			//ScrollView scroll = (ScrollView) findViewById(R.id.scrollView1);
 			LinearLayout myLayout = (LinearLayout) findViewById(R.id.linearLayout1);
 			
 			Log.e("SessionForm", "Inside question array work");

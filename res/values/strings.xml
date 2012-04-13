@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, signin!</string>
-    <string name="app_name">Project2</string>
+    <string name="app_name">servé</string>
     <string name="signIn">Sign In</string>
     <string name="createAccount">Create a New Account</string>
     <string name="username">Username:</string>
@@ -30,6 +29,9 @@
     <string name="sessionFormName">Fill in this Form, Download the File, Sign into attendence</string>
     <string name="sessionIDRequest">Session ID: </string>
     <string name="sessionNameRequest">Session Name: </string>
+    <string name="createSessionButton">Create Session</string>
+    <string name="sessionTypeTV">Type</string>
+    <string name="sessionTV">Session ID:</string>
 
     <string-array name="sessionTypes">
         <item>Attendance</item>

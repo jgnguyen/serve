@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/et_sessionkey"
         android:layout_alignParentLeft="true"
-        android:text="Session ID:"
+        android:text="@string/sessionTV"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

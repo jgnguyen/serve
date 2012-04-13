@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="89dp"
         android:textColor="#FFFFFF"
-        android:text="servé"
+        android:text="@string/app_name"
         android:textSize="100dip" />
 
     <Button
